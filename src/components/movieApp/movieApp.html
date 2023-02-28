@@ -9,7 +9,7 @@
       <v-spacer></v-spacer>
       <v-text-field
         v-model="searchTerm"
-        label="Search for a movie"
+        label="What are you looking for ?"
         hide-details
         solo-inverted
         @keyup.enter="searchMovies"
@@ -20,7 +20,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-menu offset-y>
+      <v-menu>
         <template v-slot:activator="{ on }">
           <v-btn text v-on="on" class="white--text">Show Movies</v-btn>
         </template>
@@ -38,10 +38,14 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-    <v-container>
+    <!-- create v-card -->
+    <v-container class="card-container">
       <v-row>
         <v-col cols="12" md="6" lg="4" v-for="movie in movies" :key="movie.id">
-          <v-card class="elevation-5">
+          <router-link
+            :to="{ name: 'MovieDetails', params: { id: movie.id } }"
+            class="movie-link"
+          >
             <v-img
               class="movie-poster"
               :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
@@ -54,12 +58,15 @@
             <div class="movie-rating">
               <v-icon class="yellow--text">mdi-star</v-icon>
               <span class="movie-rating-value"
-                >{{ movie.vote_average }} IMDb</span
+                >{{ Math.round(movie.vote_average) }} IMDb</span
               >
             </div>
-          </v-card>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
   </v-app>
+  <v-footer app color="black" class="white--text text-center">
+    <span>&copy; 2023 Movie App</span>
+  </v-footer>
 </v-app>

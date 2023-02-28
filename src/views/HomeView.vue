@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <movieApp></movieApp>
+    <movieDetails></movieDetails>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import movieApp from "@/components/movieApp.vue";
+import movieApp from "@/components/movieApp/movieApp.vue";
 
 @Component({
   components: {
